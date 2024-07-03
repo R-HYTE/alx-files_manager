@@ -43,6 +43,14 @@ class DBClient {
     const count = await filesCollection.countDocuments();
     return count;
   }
+
+  collection(name) {
+    if (!this.isAlive()) {
+      throw new Error('MongoDB connection error');
+    }
+
+    return this.client.db().collection(name);
+  }
 }
 
 export const dbClient = new DBClient();
